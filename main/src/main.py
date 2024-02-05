@@ -1,4 +1,5 @@
 from appwrite.client import Client
+from youtube_transcript_api import YouTubeTranscriptApi
 import os
 
 
@@ -14,17 +15,15 @@ def main(context):
     #     .set_key(os.environ["APPWRITE_API_KEY"])
     # )
 
-    # You can log messages to the console
-    context.log("Hello, Logs!")
-
-    # If something goes wrong, log an error
-    context.error("Hello, Errors!")
-
     # The `ctx.req` object contains the request data
     if context.req.method == "GET":
+        videoId = context.req.query["videoId"]
+        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+
+        context.log(transcript)
         # Send a response with the res object helpers
         # `ctx.res.send()` dispatches a string back to the client
-        return context.res.send("Hello, World!")
+        return context.res.json(transcript)
 
     # `ctx.res.json()` is a handy helper for sending JSON
     return context.res.json(
