@@ -17,8 +17,8 @@ def main(context):
 
     # The `ctx.req` object contains the request data
     if context.req.method == "GET":
-        video_id = context.req.query["video_id"]
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        videoId = context.req.query["videoId"]
+        transcript = YouTubeTranscriptApi.get_transcript(videoId)
 
         context.log(transcript)
         # Send a response with the res object helpers
